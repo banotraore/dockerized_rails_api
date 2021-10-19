@@ -1,0 +1,42 @@
+# Let's get anythinig not necessary out of the container for faster dockerisation
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore pidfiles, but keep the directory.
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
+
+# Ignore uploaded files in development.
+/storage/*
+!/storage/.keep
+.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+# !!!! Important
+.env
+
+# Git related files are obviously not necessary inside container and there are a LOT of them !
+.git*
+
+# Docker related files (not needed inside containers)
+Dockerfile
+docker/*
+
+.gitignore
+.DS_Store
+.bin
+.bundleignore
+.rspec
+test
+config/deploy
+public/packs
+public/packs-test
+coverage/

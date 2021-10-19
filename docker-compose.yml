@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgresdb:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: password
+  api:
+    build:
+      context: ./api/
+    command: bash -c "rm -f /myapp/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ./api:/myapp/api
+    ports:
+      - 3000:3000
+    env_file: ./api/.env
+    depends_on:
+      - db
+  frontend:
+    build:
+      context: ./frontend/
+    volumes:
+      - ./frontend/src:/app/src
+    ports:
+      - 3001:3001
+    command: yarn start
+    depends_on:
+      - api
+volumes:
+  postgresdb:
